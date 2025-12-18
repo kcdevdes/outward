@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUTWARD - Audio Visualizer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* File Upload Dialog */
+        #upload-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 40px;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        #upload-dialog.hidden {
+            display: none;
+        }
+
+        #upload-dialog h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .upload-btn {
+            padding: 12px 24px;
+            font-size: 1rem;
+            background: #333;
+            color: #fff;
+            border: 1px solid #666;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .upload-btn:hover {
+            background: #444;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        /* Audio Controls */
+        #audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 15px;
+            min-width: 300px;
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        #audio-controls.visible {
+            opacity: 1;
+        }
+
+        .track-info {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        button {
+            padding: 8px 16px;
+            background: #333;
+            color: #fff;
+            border: 1px solid #666;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        button:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+    <!-- Canvas Container -->
+    <div id="canvas-container">
+        <canvas id="visualizer"></canvas>
+    </div>
+
+    <!-- Upload Dialog -->
+    <div id="upload-dialog">
+        <h1>OUTWARD</h1>
+        <label for="file-input" class="upload-btn">
+            Choose Audio File
+        </label>
+        <input type="file" id="file-input" accept="audio/*">
+        <br><br>
+        <button id="play-sample-btn" class="upload-btn">
+            Play Sample
+        </button>
+    </div>
+
+    <!-- Audio Controls -->
+    <div id="audio-controls">
+        <div class="track-info">
+            <div id="track-title">No Track</div>
+            <div>
+                <span id="current-time">0:00</span> / <span id="total-time">0:00</span>
+            </div>
+        </div>
+        <div class="control-buttons">
+            <button id="play-pause-btn">Play</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
